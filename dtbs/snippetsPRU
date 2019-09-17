@@ -1,0 +1,54 @@
+// @shubham PRU pinmux
+pru0_pru1_pins: pinmux_pru0_pru1_pins {
+    pinctrl-single,pins = <
+   // AM33XX_IOPAD(0x900, PIN_INPUT | MUX_MODE6)  /* pr1_pru0_pru_r31[12] */
+   // AM33XX_IOPAD(0x904, PIN_OUTPUT | MUX_MODE5)  /* pr1_pru0_pru_r30[13] */
+   // AM33XX_IOPAD(0x99c, PIN_OUTPUT | MUX_MODE5) /* pr1_pru0_pru_r30[3] */
+   // AM33XX_IOPAD(0x9a0, PIN_OUTPUT | MUX_MODE5) /* pr1_pru0_pru_r30[4] */
+   // AM33XX_IOPAD(0x830, PIN_OUTPUT | MUX_MODE6)  /* pr1_pru0_pru_r30[14] */
+   
+   0x100   0x2e
+   0x104   0x0d
+   0x19c   0x0d
+   0x1a0   0x0d
+   0x030   0x0e
+   
+    // pru 1
+   // AM33XX_IOPAD(0x8a4, PIN_OUTPUT | MUX_MODE5) /* pr1_pru1_pru_r30[1] */
+   // AM33XX_IOPAD(0x8a8, PIN_INPUT | MUX_MODE6) /* pr1_pru1_pru_r31[2] */
+   // AM33XX_IOPAD(0x8ac, PIN_OUTPUT | MUX_MODE5) /* pr1_pru1_pru_r30[3] */
+   // AM33XX_IOPAD(0x8b0, PIN_OUTPUT | MUX_MODE5) /* pr1_pru1_pru_r30[4] */
+   // AM33XX_IOPAD(0x8b4, PIN_OUTPUT | MUX_MODE5) /* pr1_pru1_pru_r30[5] */
+   
+   0x0a4   0x0d
+   0x0a8   0x2e
+   0x0ac   0x0d
+   0x0b0   0x0d
+   0x0b4   0x0d
+    >;
+};
+
+
+//GPIO_PINS
+gpio0_pins: pinmux_gpio0_pins {
+  pinctrl-single,pins = <
+  	AM33XX_IOPAD(0x8dc, PIN_INPUT | MUX_MODE5) /* (D18) uart1_ctsn.gpio0[12]978 [11]8dc*/
+	AM33XX_IOPAD(0x8d4, PIN_INPUT | MUX_MODE7) /* (D17) uart1_rtsn.gpio0[13]97c [9]8d4*/
+    >;
+ };
+  
+gpio1_pins: pinmux_gpio1_pins {
+  pinctrl-single,pins = <
+  	AM33XX_IOPAD(0x83c, PIN_INPUT | MUX_MODE6) /* (U13) gpmc_ad15.gpio1[15] */
+	AM33XX_IOPAD(0x87c, PIN_OUTPUT | MUX_MODE7) /* (V6) gpmc_csn0.gpio1[29] */
+    >;
+  };
+  
+gpio2_pins: pinmux_gpio2_pins {
+  pinctrl-single,pins = <
+  	//AM33XX_IOPAD(0x888, PIN_OUTPUT | MUX_MODE7) /* (T13) gpmc_csn3.gpio2[0] */
+	AM33XX_IOPAD(0x88c, PIN_OUTPUT | MUX_MODE7) /* (V12) gpmc_clk.gpio2[1] */
+	AM33XX_IOPAD(0x890, PIN_OUTPUT | MUX_MODE7) /* (R7) gpmc_advn_ale.gpio2[2] */
+	AM33XX_IOPAD(0x894, PIN_OUTPUT | MUX_MODE7) /* (T7) gpmc_oen_ren.gpio2[3] */
+    >;
+  };

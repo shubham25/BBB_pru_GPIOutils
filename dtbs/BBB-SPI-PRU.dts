@@ -1,0 +1,68 @@
+/* Device Tree Overlay for enabling the pins that are used for PRU-0 SPI
+trans_on : r31.15 , p8_15, 6_pd
+clk_out : r30.15, p8_11 , 6_pd
+ssbar2 : r30.6 , p9_41 , 5_pu
+ssbar1 : r30.7 , p9_25 , 5_pu
+miso_in : r31.14 , p8_16, 6_pu
+mosi_out: r30.14 , p8_12 , 6_pd
+
+*/
+/dts-v1/;
+/plugin/;
+
+/ {
+   compatible = "ti,beaglebone", "ti,beaglebone-black";
+
+   part-number = "BBB-SPI-PRU";
+   version = "00A0";
+
+   /* This overlay uses the following resources */
+   exclusive-use = "P8.15", "P8.11", "P8.16", "P8.12", "P9.41" , "P9.25",  "pru0";
+
+   fragment@0 {
+      target = <&am33xx_pinmux>;
+      __overlay__ {
+	/*
+         gpio_pins: pinmux_gpio_pins {         // The GPIO pins
+            pinctrl-single,pins = <
+               0x070 0x07  // P9_11 MODE7 | OUTPUT | GPIO pull-down
+               0x074 0x27  // P9_13 MODE7 | INPUT | GPIO pull-down
+            >;
+         };
+	*/
+         pru_pru_pins: pinmux_pru_pru_pins {   // The PRU pin modes
+            pinctrl-single,pins = <
+               0x03c 0x06 // TRANS_ON
+               0x034 0x36  // 
+               0x1a8 0x15 // CS_6
+               0X1ac 0x15 // CS_7
+               0x038 0x06 //
+               0x030 0x06 //
+            >;
+         };
+      };
+   };
+
+   fragment@1 {         // Enable the PRUSS
+      target = <&pruss>;
+      __overlay__ {
+         status = "okay";
+         pinctrl-names = "default";
+         pinctrl-0 = <&pru_pru_pins>;
+      };
+   };
+
+   /*
+   fragment@2 {         // Enable the GPIOs
+      target = <&ocp>;
+      __overlay__ {
+         gpio_helper {
+            compatible = "gpio-of-helper";
+            status = "okay";
+            pinctrl-names = "default";
+            pinctrl-0 = <&gpio_pins>;
+         };
+      };
+   };
+   */
+};
